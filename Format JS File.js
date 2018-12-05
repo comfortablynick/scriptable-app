@@ -8,7 +8,7 @@
 const file = args.fileURLs[0];
 
 const fm = FileManager.iCloud()
-const text = fm.readString(file)
+// const text = fm.readString(file)
 
 console.log(legacy_beautify_js("var i=0;      \n\n\n\nconst s = 1;"))
 

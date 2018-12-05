@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: deep-gray; icon-glyph: magic;
+// icon-color: pink; icon-glyph: magic;
 const containers = await ContactsContainer.all();
 
 let fsgContacts = [];
@@ -10,7 +10,6 @@ for (let ct of containers) {
   fsgContacts = contacts.filter(c => c.organizationName === "FSG");
 }
 
-console.log(fsgContacts);
 let numbers = [];
 
 for (let c of fsgContacts) {
@@ -18,18 +17,19 @@ for (let c of fsgContacts) {
   let firstName = c.givenName
   for (let n of c.phoneNumbers) {
     if (n['localizedLabel'] === 'mobile') {
-      numbers.push([n['value'], lastName, firstName]);
+      numbers.push([n['value'], lastName, firstName].join('|'));
+//       numbers.push(n['value']);
     }
   }
 }
 
-// console.log(numbers);
-const text = 'Good morning friends, in case any are going in service this morning, the meeting will be at 10AM at the Ridgley home (207 Lilly Lane in Lewisville) due to the Chin convention at the hall.'
+const numsOnly = encodeURIComponent(numbers.join('\n'))
 
-for (let n of numbers) {
-    console.log(n)
-    let msg = new Message();
-    msg.recipients = [n[0]]
-    msg.body = text;
-    msg.send();
-}
+// console.log(numsOnly)
+// console.log(URLScheme.forRunningScript())
+
+let params = URLScheme.allParameters()
+let baseURL = params["x-success"]
+let url = baseURL + "?nums=" + numsOnly;
+console.log(url)
+Safari.open(url)
