@@ -24,7 +24,7 @@ for (let c of fsgContacts) {
 }
 
 // console.log(numbers);
-const text = 'Good morning friends, in case any are going in service this morning, the meeting will be at 10AM at the Ridgley home (207 Lilly Lane in Lewisville) due to the Chin convention at the hall.'
+const text = 'Good morning'
 
 for (let n of numbers) {
     console.log(n)
